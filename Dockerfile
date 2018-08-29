@@ -11,8 +11,14 @@ RUN apt-get update && \
   dpkg -i dumb-init_*.deb && rm -f dumb-init_*.deb && \
   apt-get clean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
 
+RUN npm i -g puppeteer@1.7.0 && npm cache clean
+
+ENV PUPPETEER_CHROMIUM_REVISION="579032"
+ENV CHROME_PUPPETEER_PATH="/usr/local/share/.config/npm/global/node_modules/.local-chromium/linux-579032/chrome-linux/chrome"
+
 # add user
 RUN groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser
+
 
 # Set language to UTF8
 ENV LANG="C.UTF-8"
@@ -26,3 +32,4 @@ USER pptruser
 # https://docs.docker.com/engine/reference/run/#additional-groups
 
 ENTRYPOINT ["dumb-init", "--"]
+ 
