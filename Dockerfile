@@ -14,7 +14,8 @@ RUN apt-get update && \
 RUN npm i -g puppeteer@1.7.0 && npm cache clean
 
 ENV PUPPETEER_CHROMIUM_REVISION="579032"
-ENV CHROME_PUPPETEER_PATH="/usr/local/share/.config/npm/global/node_modules/.local-chromium/linux-579032/chrome-linux/chrome"
+ENV NODE_PATH="/usr/local/lib/node_modules:${NODE_PATH}"
+ENV CHROME_PUPPETEER_PATH="/usr/local/lib/node_modules/puppeteer/.local-chromium/linux-579032/chrome-linux/chrome"
 
 # add user
 RUN groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser
