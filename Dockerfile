@@ -11,6 +11,8 @@ RUN apt-get update && \
   dpkg -i dumb-init_*.deb && rm -f dumb-init_*.deb && \
   apt-get clean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
 
+USER root
+
 RUN npm i -g puppeteer@1.7.0 && npm cache clean
 
 ENV PUPPETEER_CHROMIUM_REVISION="579032"
